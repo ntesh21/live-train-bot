@@ -607,7 +607,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <i class="fas fa-times pull-right" onclick="closeForm()" style="color: #eaeaea;"></i>
             </div>
         </div>         
-        <form method = 'POST'>           
+        <form method = 'POST'> 
+        {% csrf_token %}          
             <div id="chatbox">
                 <div id="chatroom">
                     <div id="bot-chat-top"></div>
@@ -735,11 +736,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     </script>
     <script>
-        var roomName = {{ room_name_json }};
-
     var chatSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat/' + roomName + '/');
+        'ws://' + window.location.host);
 
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
