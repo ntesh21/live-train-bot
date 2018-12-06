@@ -3,6 +3,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 import json
 import importlib
+import random
 
 from chat.chatModel import learning2
 #from chat.chatModel.restaurants.learning2 import welcome_msg
@@ -14,6 +15,7 @@ import os
 lock=0
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
+        self.scope["session"]["seed"] = random.randint(1, 1000)
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
 
